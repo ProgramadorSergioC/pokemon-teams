@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Pokedex Teams{% endblock %}</title>
+    <!-- Agrega aquí tus etiquetas meta, CSS, JavaScript, etc. -->
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="/">Inicio</a></li>
+                <li><a href="{% url 'type_list' %}">Tipos de Pokémon</a></li>
+                <li><a href="{% url 'pokemon_list' %}">Pokémon</a></li>
+                <li><a href="{% url 'box_list' %}">Cajas</a></li>
+                <li><a href="{% url 'team_list' %}">Equipos</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+    <footer>
+        <!-- Agrega aquí el contenido del pie de página si lo deseas. -->
+    </footer>
+</body>
+</html>

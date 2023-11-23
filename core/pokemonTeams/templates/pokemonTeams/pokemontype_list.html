@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %}Tipos de Pokémon{% endblock %}
+
+{% block content %}
+  <div class="container">
+    <h1>Tipos de Pokémon</h1>
+    <ul>
+      {% for type in types %}
+        <li>
+          {{ type.name }}
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+{% endblock %}

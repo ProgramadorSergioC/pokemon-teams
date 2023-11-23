@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block title %}Detalles de la Caja{{ object.name }}{% endblock %}
+
+{% block content %}
+  <div class="container">
+    <h1>Detalles de la Caja</h1>
+    <p><strong>Nombre:</strong> {{ object.name }}</p>
+    <p><strong>Límite de Espacio:</strong> {{ object.space_limit }}</p>
+    <p><strong>Pokémons:</strong>
+        <ul>
+            {% for pokemon in object.pokemons.all %}
+                <li>{{ pokemon.name }}</li>
+            {% endfor %}
+        </ul>
+    </p>
+    <a href="{% url 'box_list' %}">Volver a la lista de Cajas</a>
+  </div>
+{% endblock %}

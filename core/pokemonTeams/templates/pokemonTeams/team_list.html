@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %}Lista de Equipos{% endblock %}
+
+{% block content %}
+  <div class="container">
+    <h1>Lista de Equipos</h1>
+    <a href="{% url 'team_create' %}" class="btn btn-success">Crear Equipo</a>
+    <ul>
+      {% for team in teams %}
+        <li>
+          <a href="{% url 'team_detail' team.pk %}">{{ team.name }}</a>
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+{% endblock %}
