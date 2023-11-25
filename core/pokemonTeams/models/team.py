@@ -7,7 +7,6 @@ from accounts.models import Trainer
 class Team(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField(blank=True)
-    pokemons = models.ManyToManyField(Pokemon)
     trainer = models.ForeignKey(Trainer, on_delete=models.CASCADE)
 
     def __str__(self):

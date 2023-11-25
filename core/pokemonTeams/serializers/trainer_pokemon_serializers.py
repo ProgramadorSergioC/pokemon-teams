@@ -1,5 +1,7 @@
 from rest_framework import serializers
-from pokemonTeams.models import TrainerPokemon
+from pokemonTeams.models import TrainerPokemon, Box
+from django.db.models import F, Count
+
 
 
 class TrainerPokemonSerializer(serializers.ModelSerializer):
@@ -7,21 +9,21 @@ class TrainerPokemonSerializer(serializers.ModelSerializer):
         model = TrainerPokemon
         fields = ['id', 'pokemon', 'trainer', 'level', 'box', 'team']
 
-    def to_representation(self, instance):
-        representation = super().to_representation(instance)
+    def create(self, validated_data):
+        # Get the trainer from validated_data
+        trainer = validated_data['trainer']
 
-        # Comprobación de la cantidad de pokémons en una Box
-        if instance.box:
-            box_pokemon_count = instance.box.trainerpokemon_set.count()
-            representation['box_full'] = box_pokemon_count >= 30
-        else:
-            representation['box_full'] = False
+        # If no box is specified, assign the first box associated with the trainer
+        if 'box' not in validated_data or validated_data['box'] is None:
+            # If no available boxes are found, filter to get the first box with space available for more Pokémon
+            validated_data['box'] = trainer.box_set.annotate(num_pokemon=Count('trainerpokemon')).filter(
+                space_limit__gt=F('num_pokemon')).first()
 
-        # Comprobación de la cantidad de pokémons en un Team
-        if instance.team:
-            team_pokemon_count = instance.team.trainerpokemon_set.count()
-            representation['team_full'] = team_pokemon_count >= 6
-        else:
-            representation['team_full'] = False
+        # If no available boxes are found, raise an error
+        if validated_data['box'] is None:
+            raise serializers.ValidationError("No available box with sufficient space for capturing more Pokémon.")
 
-        return representation
+        # Create the TrainerPokemon instance
+        trainer_pokemon = TrainerPokemon.objects.create(**validated_data)
+
+        return trainer_pokemon

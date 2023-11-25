@@ -6,5 +6,4 @@ class BoxSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Box
-        # fields = '__all__'
-        fields = ['name', 'pokemons']
+        fields = '__all__'
