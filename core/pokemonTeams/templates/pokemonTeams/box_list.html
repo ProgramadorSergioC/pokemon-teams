@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %}Lista de Cajas{% endblock %}
+
+{% block content %}
+  <div class="container">
+    <h1>Lista de Cajas</h1>
+    <a href="{% url 'box_create' %}" class="btn btn-success">Crear Caja</a>
+    <ul>
+      {% for box in boxes %}
+        <li>
+          <a href="{% url 'box_detail' box.pk %}">{{ box.name }}</a>
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+{% endblock %}

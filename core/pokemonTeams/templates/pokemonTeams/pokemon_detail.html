@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block title %}Detalles del Pokémon: {{ object.name }}{% endblock %}
+
+{% block content %}
+  <div class="container">
+    <h1>Detalles del Pokémon: {{ object.name }}</h1>
+    <p>Nombre: {{ object.name }}</p>
+    <p>Tipos:
+      {% for type in object.types.all %}
+        {{ type.name }}
+        {% if not forloop.last %}, {% endif %}
+      {% endfor %}
+    </p>
+    <p>Imagen: <img src="{{ object.image.url }}" alt="{{ object.name }}" style="max-width: 300px;"></p>
+
+    <a href="{% url 'pokemon_list' %}" class="btn btn-primary">Volver a la lista de Pokémon</a>
+  </div>
+{% endblock %}

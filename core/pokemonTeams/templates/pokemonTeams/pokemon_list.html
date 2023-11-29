@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %}Lista de Pokémon{% endblock %}
+
+{% block content %}
+  <div class="container">
+    <h1>Lista de Pokémon</h1>
+    <a href="{% url 'pokemon_create' %}" class="btn btn-success">Crear Pokémon</a>
+    <ul>
+      {% for pokemon in pokemons %}
+        <li>
+          <a href="{% url 'pokemon_detail' pokemon.pk %}">{{ pokemon.name }}</a>
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+{% endblock %}

@@ -1,21 +1,19 @@
-"""Core-pokemonTeams URL Configuration
+from rest_framework import routers
+from django.urls import path, re_path
+from .views import *
 
-The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/4.1/topics/http/urls/
-Examples:
-Function views
-    1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  path('', views.home, name='home')
-Class-based views
-    1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
-Including another URLconf
-    1. Import the include() function: from django.urls import include, path
-    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
-"""
-from django.contrib import admin
-from django.urls import path
+router = routers.DefaultRouter()
+router.register(r'boxes', BoxViewSet, basename='box')
+router.register(r'pokemons', PokemonViewSet, basename='pokemon')
+router.register(r'pokemon-types', PokemonTypeViewSet, basename='pokemon-type')
+router.register(r'teams', TeamViewSet, basename='team')
+router.register(r'trainer-pokemons', TrainerPokemonViewSet, basename='trainer-pokemon')
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('trainer-pokemon/add_to_team/<int:trainerpokemon_id>/<int:team_id>/',
+         TrainerPokemonViewSet.as_view({'post': 'add_to_team'}), name='trainer-pokemon-add-to-team'),
+    re_path(r'trainer-pokemon/add_to_box/(?P<trainerpokemon_id>\d+)(/(?P<box_id>\d+))?/',
+            TrainerPokemonViewSet.as_view({'post': 'add_to_box'}), name='trainer-pokemon-add-to-box'),
 ]
+
+urlpatterns += router.urls
