@@ -1,8 +1,11 @@
 from rest_framework import serializers
 from pokemonTeams.models import Pokemon
+from . import PokemonTypeSerializer
 
 
 class PokemonSerializer(serializers.ModelSerializer):
+    types = PokemonTypeSerializer(many=True, read_only=True)
+
     class Meta:
         model = Pokemon
         fields = '__all__'

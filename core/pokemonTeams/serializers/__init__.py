@@ -1,5 +1,5 @@
-from .pokemon_serializers import PokemonSerializer
 from .pokemon_type_serializers import PokemonTypeSerializer
+from .pokemon_serializers import PokemonSerializer
 from .box_serializers import BoxSerializer
 from .team_serializers import TeamSerializer
 from .trainer_pokemon_serializers import TrainerPokemonSerializer

@@ -10,6 +10,7 @@ class PokemonViewSet(viewsets.ModelViewSet):
     def create(self, request, *args, **kwargs):
         try:
             response = super().create(request, *args, **kwargs)
+            response["Access-Control-Allow-Origin"] = "http://localhost:5173"
             return response
         except Exception as e:
             # Registra información detallada sobre la excepción
