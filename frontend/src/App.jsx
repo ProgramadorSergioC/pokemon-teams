@@ -1,10 +1,11 @@
 import { Routes, Route } from "react-router-dom";
 import "./App.css";
 import Navbar from "./components/Navbar";
-import Pokedex from "./routes/pokedex";
-import Home from "./routes/home";
+import Pokedex from "./features/pokemons/pokedex";
+import Home from "./features/home";
 import Login from "./features/auth/Login";
 import RequireAuth from "./features/auth/RequireAuth";
+import Logout from "./features/auth/Logout";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <Route path="/" element={<Navbar />}>
           {/* public routes */}
           <Route index element={<Home />} />
+          <Route path="/logout" element={<Logout />} />
           <Route path="/login" element={<Login />} />
           {/* protected routes */}
           <Route element={<RequireAuth />}>

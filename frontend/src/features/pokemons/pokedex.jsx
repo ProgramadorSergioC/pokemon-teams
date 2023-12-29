@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
-import PokemonCard from "../components/PokemonCard";
-import { useGetPokemonsQuery } from "../features/pokemons/pokemonsApiSlice";
+import PokemonCard from "../../components/PokemonCard";
+import { useGetPokemonsQuery } from "./pokemonsApiSlice";
 
-import { getPokemons } from "../services/api";
+import { getPokemons } from "../../services/api";
 
 const Pokedex = () => {
   const {

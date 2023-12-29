@@ -30,11 +30,11 @@ const LoginForm = ({ onClose }) => {
 
   return (
     <div className="w-full max-w-xs">
-      <Form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit}>
         <div className="mb-4">
           <label
             className="block text-gray-700 text-sm font-bold mb-2"
-            for="username"
+            htmlFor="username"
           >
             Username
           </label>
@@ -51,7 +51,7 @@ const LoginForm = ({ onClose }) => {
         <div className="mb-6">
           <label
             className="block text-gray-700 text-sm font-bold mb-2"
-            for="password"
+            htmlFor="password"
           >
             Password
           </label>
@@ -79,7 +79,7 @@ const LoginForm = ({ onClose }) => {
             Forgot Password?
           </a>
         </div>
-      </Form>
+      </form>
     </div>
   );
 };
